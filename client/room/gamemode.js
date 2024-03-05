@@ -49,7 +49,9 @@ LeaderBoard.PlayerLeaderBoardValues = [
 	new DisplayValueHeader("Kills", "Statistics/Kills", "Statistics/KillsShort"),
 	new DisplayValueHeader("Deaths", "Statistics/Deaths", "Statistics/DeathsShort"),
 	new DisplayValueHeader("Spawns", "Statistics/Spawns", "Statistics/SpawnsShort"),
-	new DisplayValueHeader("Scores", "Statistics/Scores", "Statistics/ScoresShort")
+	new DisplayValueHeader("Scores", "Statistics/Scores", "Statistics/ScoresShort"),
+// vis	
+GetContext().TeamProp1.Value = {Team: "better", Prop: "hint"};
 ];
 LeaderBoard.TeamLeaderBoardValue = new DisplayValueHeader("Deaths", "Statistics\Deaths", "Statistics\Deaths");
 // ��� ������� � ����������
