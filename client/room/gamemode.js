@@ -5,9 +5,9 @@ import * as teams from './default_teams.js';
 //var System = importNamespace('System');
 
 // настройки
-const WaitingPlayersTime = 1;
+const WaitingPlayersTime = 10;
 const BuildBaseTime = 30;
-const GameModeTime = 300;
+const GameModeTime = 600;
 const EndOfMatchTime = 10;
 const maxDeaths = Players.MaxCount * 5;
 
@@ -46,10 +46,11 @@ redTeam.Properties.Get("Deaths").Value = maxDeaths;
 blueTeam.Properties.Get("Deaths").Value = maxDeaths;
 // настраиваем параметры, которые нужно выводить в лидерборде
 LeaderBoard.PlayerLeaderBoardValues = [
-	new DisplayValueHeader("Kills", "Убийства", "УБ"),
-	new DisplayValueHeader("Deaths", "Смерти", "СМ"),
-	new DisplayValueHeader("Spawns", "Спавны", "СП"),
-	new DisplayValueHeader("Scores", "Очки", "ОЧ"),
+	new DisplayValueHeader("Kills", "Statistics/Kills", "Statistics/KillsShort"),
+	new DisplayValueHeader("Deaths", "Statistics/Deaths", "Statistics/DeathsShort"),
+	new DisplayValueHeader("Spawns", "Statistics/Spawns", "Statistics/SpawnsShort"),
+	new DisplayValueHeader("Scores", "Statistics/Scores", "Statistics/ScoresShort")
+];
 LeaderBoard.TeamLeaderBoardValue = new DisplayValueHeader("Deaths", "Statistics\Deaths", "Statistics\Deaths");
 // ��� ������� � ����������
 LeaderBoard.TeamWeightGetter.Set(function (team) {
@@ -131,14 +132,14 @@ SetWaitingMode();
 // ��������� ����
 function SetWaitingMode() {
 	stateProp.Value = WaitingStateValue;
-	Ui.GetContext().Hint.Value = "Ждем игроков...";
+	Ui.GetContext().Hint.Value = "стоп";
 	Spawns.GetContext().enable = false;
 	mainTimer.Restart(WaitingPlayersTime);
 }
 
 function SetBuildMode() {
 	stateProp.Value = BuildModeStateValue;
-	Ui.GetContext().Hint.Value = "Строй базу!";
+	Ui.GetContext().Hint.Value = "купе гейммод";
 	var inventory = Inventory.GetContext();
 	inventory.Main.Value = false;
 	inventory.Secondary.Value = false;
@@ -152,7 +153,7 @@ function SetBuildMode() {
 }
 function SetGameMode() {
 	stateProp.Value = GameStateValue;
-	Ui.GetContext().Hint.Value = "Начали!";
+	Ui.GetContext().Hint.Value = "тестирую 2.0";
 
 	var inventory = Inventory.GetContext();
 	if (GameMode.Parameters.GetBool("OnlyKnives")) {
@@ -166,7 +167,7 @@ function SetGameMode() {
 		inventory.Secondary.Value = true;
 		inventory.Melee.Value = true;
 		inventory.Explosive.Value = true;
-		inventory.BuildInfinity.Value = true;
+		inventory.Build.Value = true;
 	}
 
 	mainTimer.Restart(GameModeTime);
@@ -175,7 +176,7 @@ function SetGameMode() {
 }
 function SetEndOfMatchMode() {
 	stateProp.Value = EndOfMatchStateValue;
-	Ui.GetContext().Hint.Value = "Конец Матча!";
+	Ui.GetContext().Hint.Value = "Hint/EndOfMatch";
 
 	var spawns = Spawns.GetContext();
 	spawns.enable = false;
@@ -190,4 +191,4 @@ function RestartGame() {
 function SpawnTeams() {
 	for (const team of Teams)
 		Spawns.GetContext(team).Spawn();
-}
+		}
