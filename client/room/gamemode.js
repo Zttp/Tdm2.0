@@ -5,11 +5,11 @@ import * as teams from './default_teams.js';
 //var System = importNamespace('System');
 
 // настройки
-const WaitingPlayersTime = 10;
-const BuildBaseTime = 30;
-const GameModeTime = 600;
-const EndOfMatchTime = 10;
-const maxDeaths = Players.MaxCount * 5;
+const WAITING = 5;
+const TIMEFORBUILD = 30;
+const MATCH = 600;
+const END = 10;
+const MAXDEATHS = Players.MaxCount * 5;
 
 // имена используемых объектов
 const WaitingStateValue = "Waiting";
@@ -73,7 +73,7 @@ Teams.OnPlayerChangeTeam.Add(function (player) { player.Spawns.Spawn() });
 // бессмертие после респавна
 Spawns.GetContext().OnSpawn.Add(function (player) {
 	player.Properties.Immortality.Value = true;
-	player.Timers.Get(immortalityTimerName).Restart(5);
+	player.Timers.Get(immortalityTimerName).Restart(3);
 });
 Timers.OnPlayerTimer.Add(function (timer) {
 	if (timer.Id != immortalityTimerName) return;
@@ -104,7 +104,7 @@ Damage.OnDeath.Add(function (player) {
 Damage.OnKill.Add(function (player, killed) {
 	if (killed.Team != null && killed.Team != player.Team) {
 		++player.Properties.Kills.Value;
-		player.Properties.Scores.Value += 191920;
+		player.Properties.Scores.Value += 10;
 	}
 });
 
@@ -132,14 +132,14 @@ SetWaitingMode();
 // ��������� ����
 function SetWaitingMode() {
 	stateProp.Value = WaitingStateValue;
-	Ui.GetContext().Hint.Value = "стоп";
+	Ui.GetContext().Hint.Value = "Ждём игроков!";
 	Spawns.GetContext().enable = false;
 	mainTimer.Restart(WaitingPlayersTime);
 }
 
 function SetBuildMode() {
 	stateProp.Value = BuildModeStateValue;
-	Ui.GetContext().Hint.Value = "купе гейммод";
+	Ui.GetContext().Hint.Value = "Строй Базу!";
 	var inventory = Inventory.GetContext();
 	inventory.Main.Value = false;
 	inventory.Secondary.Value = false;
@@ -153,7 +153,7 @@ function SetBuildMode() {
 }
 function SetGameMode() {
 	stateProp.Value = GameStateValue;
-	Ui.GetContext().Hint.Value = "тестирую 2.0";
+	Ui.GetContext().Hint.Value = "Матч начался!";
 
 	var inventory = Inventory.GetContext();
 	if (GameMode.Parameters.GetBool("OnlyKnives")) {
@@ -163,11 +163,11 @@ function SetGameMode() {
 		inventory.Explosive.Value = false;
 		inventory.Build.Value = true;
 	} else {
-		inventory.Main.Value = true;
-		inventory.Secondary.Value = true;
+		inventory.MainInfinity.Value = true;
+		inventory.SecondaryInfinity.Value = true;
 		inventory.Melee.Value = true;
 		inventory.Explosive.Value = true;
-		inventory.Build.Value = true;
+		inventory.BuildInfinity.Value = true;
 	}
 
 	mainTimer.Restart(GameModeTime);
@@ -176,7 +176,7 @@ function SetGameMode() {
 }
 function SetEndOfMatchMode() {
 	stateProp.Value = EndOfMatchStateValue;
-	Ui.GetContext().Hint.Value = "Hint/EndOfMatch";
+	Ui.GetContext().Hint.Value = "Матч окончен!";
 
 	var spawns = Spawns.GetContext();
 	spawns.enable = false;
