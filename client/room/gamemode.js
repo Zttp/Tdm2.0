@@ -21,7 +21,26 @@ const immortalityTimerName = "immortality"; // имя таймера, испол
 // получаем объекты, с которыми работает режим
 const mainTimer = Timers.GetContext().Get("Main");
 const stateProp = Properties.GetContext().Get("State");
-
+// kir
+export function set_editor_options() {
+    Build.GetContext().Pipette.Value = true;
+    Build.GetContext().FloodFill.Value = true;
+    Build.GetContext().FillQuad.Value = true;
+    Build.GetContext().RemoveQuad.Value = true;
+    Build.GetContext().BalkLenChange.Value = true;
+    Build.GetContext().FlyEnable.Value = true;
+    Build.GetContext().SetSkyEnable.Value = true;
+    Build.GetContext().GenMapEnable.Value = true;
+    Build.GetContext().ChangeCameraPointsEnable.Value = true;
+    Build.GetContext().QuadChangeEnable.Value = true;
+    Build.GetContext().BuildModeEnable.Value = true;
+    Build.GetContext().CollapseChangeEnable.Value = true;
+    Build.GetContext().RenameMapEnable.Value = true;
+    Build.GetContext().ChangeMapAuthorsEnable.Value = true;
+    Build.GetContext().LoadMapEnable.Value = true;
+    Build.GetContext().ChangeSpawnsEnable.Value = true;
+    Build.GetContext().BuildRangeEnable.Value = true;
+	
 // применяем параметры конструктора режима
 Damage.FriendlyFire = GameMode.Parameters.GetBool("FriendlyFire");
 Map.Rotation = GameMode.Parameters.GetBool("MapRotation");
