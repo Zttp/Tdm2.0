@@ -5,11 +5,11 @@ import * as teams from './default_teams.js';
 //var System = importNamespace('System');
 
 // настройки
-const WAITING = 5;
-const TIMEFORBUILD = 30;
-const MATCH = 600;
-const END = 10;
-const MAXDEATHS = Players.MaxCount * 5;
+const WaitingPlayersTime = 1;
+const BuildBaseTime = 30;
+const GameModeTime = 300;
+const EndOfMatchTime = 10;
+const maxDeaths = Players.MaxCount * 5;
 
 // имена используемых объектов
 const WaitingStateValue = "Waiting";
@@ -73,7 +73,7 @@ Teams.OnPlayerChangeTeam.Add(function (player) { player.Spawns.Spawn() });
 // бессмертие после респавна
 Spawns.GetContext().OnSpawn.Add(function (player) {
 	player.Properties.Immortality.Value = true;
-	player.Timers.Get(immortalityTimerName).Restart(3);
+	player.Timers.Get(immortalityTimerName).Restart(5);
 });
 Timers.OnPlayerTimer.Add(function (timer) {
 	if (timer.Id != immortalityTimerName) return;
@@ -104,7 +104,7 @@ Damage.OnDeath.Add(function (player) {
 Damage.OnKill.Add(function (player, killed) {
 	if (killed.Team != null && killed.Team != player.Team) {
 		++player.Properties.Kills.Value;
-		player.Properties.Scores.Value += 10;
+		player.Properties.Scores.Value += 191920;
 	}
 });
 
@@ -132,14 +132,14 @@ SetWaitingMode();
 // ��������� ����
 function SetWaitingMode() {
 	stateProp.Value = WaitingStateValue;
-	Ui.GetContext().Hint.Value = "Ждём игроков!";
+	Ui.GetContext().Hint.Value = "Ждем игроков...";
 	Spawns.GetContext().enable = false;
 	mainTimer.Restart(WaitingPlayersTime);
 }
 
 function SetBuildMode() {
 	stateProp.Value = BuildModeStateValue;
-	Ui.GetContext().Hint.Value = "Строй Базу!";
+	Ui.GetContext().Hint.Value = "Строй базу!";
 	var inventory = Inventory.GetContext();
 	inventory.Main.Value = false;
 	inventory.Secondary.Value = false;
@@ -153,7 +153,7 @@ function SetBuildMode() {
 }
 function SetGameMode() {
 	stateProp.Value = GameStateValue;
-	Ui.GetContext().Hint.Value = "Матч начался!";
+	Ui.GetContext().Hint.Value = "Начали!";
 
 	var inventory = Inventory.GetContext();
 	if (GameMode.Parameters.GetBool("OnlyKnives")) {
@@ -176,7 +176,7 @@ function SetGameMode() {
 }
 function SetEndOfMatchMode() {
 	stateProp.Value = EndOfMatchStateValue;
-	Ui.GetContext().Hint.Value = "Матч окончен!";
+	Ui.GetContext().Hint.Value = "Конец Матча!";
 
 	var spawns = Spawns.GetContext();
 	spawns.enable = false;
@@ -191,4 +191,4 @@ function RestartGame() {
 function SpawnTeams() {
 	for (const team of Teams)
 		Spawns.GetContext(team).Spawn();
-    }
+}
