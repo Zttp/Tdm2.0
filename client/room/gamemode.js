@@ -46,13 +46,10 @@ redTeam.Properties.Get("Deaths").Value = maxDeaths;
 blueTeam.Properties.Get("Deaths").Value = maxDeaths;
 // настраиваем параметры, которые нужно выводить в лидерборде
 LeaderBoard.PlayerLeaderBoardValues = [
-	new DisplayValueHeader("Kills", "Statistics/Kills", "Statistics/KillsShort"),
-	new DisplayValueHeader("Deaths", "Statistics/Deaths", "Statistics/DeathsShort"),
-	new DisplayValueHeader("Spawns", "Statistics/Spawns", "Statistics/SpawnsShort"),
-	new DisplayValueHeader("Scores", "Statistics/Scores", "Statistics/ScoresShort"),
-// vis	
-GetContext().TeamProp1.Value = {Team: "better", Prop: "hint"};
-];
+	new DisplayValueHeader("Kills", "Убийства", "УБ"),
+	new DisplayValueHeader("Deaths", "Смерти", "СМ"),
+	new DisplayValueHeader("Spawns", "Спавны", "СП"),
+	new DisplayValueHeader("Scores", "Очки", "ОЧ"),
 LeaderBoard.TeamLeaderBoardValue = new DisplayValueHeader("Deaths", "Statistics\Deaths", "Statistics\Deaths");
 // ��� ������� � ����������
 LeaderBoard.TeamWeightGetter.Set(function (team) {
@@ -165,8 +162,8 @@ function SetGameMode() {
 		inventory.Explosive.Value = false;
 		inventory.Build.Value = true;
 	} else {
-		inventory.MainInfinity.Value = true;
-		inventory.SecondaryInfinity.Value = true;
+		inventory.Main.Value = true;
+		inventory.Secondary.Value = true;
 		inventory.Melee.Value = true;
 		inventory.Explosive.Value = true;
 		inventory.BuildInfinity.Value = true;
