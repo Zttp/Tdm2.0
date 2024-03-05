@@ -19,16 +19,16 @@
     "Bool": [
       {
         "Name": "смена карты",
-        "DisplayName": "GmParams/MapRotation",
+        "DisplayName": "Смена Карты",
         "Default": true
       },
       {
         "Name": "На ножах",
-        "DisplayName": "GmParams/OnlyKnives"
+        "DisplayName": "На Ножах"
       },
       {
         "Name": "Неломаемые Блоки",
-        "DisplayName": "GmParams/PartialDesruction"
+        "DisplayName": "Неломаемые Блоки"
       },
       {
         "Name": "LoosenBlocks",
