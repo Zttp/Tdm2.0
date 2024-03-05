@@ -1,6 +1,6 @@
 {
-  "Name": "Test Tdm",
-  "Description": "тестирую (zttp)",
+  "Name": "4Teams",
+  "Description": "Режим от qupe, в тесте ",
   "StartClientVersion": 5338,
   "MapFilter": {
     "IsBlank": false,
@@ -18,25 +18,21 @@
   "Parameters": {
     "Bool": [
       {
-        "Name": "MapRotation",
+        "Name": "смена карты",
         "DisplayName": "GmParams/MapRotation",
         "Default": true
       },
       {
-        "Name": "OnlyKnives",
+        "Name": "На ножах",
         "DisplayName": "GmParams/OnlyKnives"
       },
       {
-        "Name": "PartialDesruction",
+        "Name": "Неломаемые Блоки",
         "DisplayName": "GmParams/PartialDesruction"
       },
       {
         "Name": "LoosenBlocks",
         "DisplayName": "GmParams/LoosenBlocks"
-      },
-      {
-        "Name": "FriendlyFire",
-        "DisplayName": "GmParams/FriendlyFire"
       }
     ]
   }
