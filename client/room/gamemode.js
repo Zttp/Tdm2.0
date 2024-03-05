@@ -38,12 +38,15 @@ Ui.GetContext().MainTimerId.Value = mainTimer.Id;
 // создаем стандартные команды
 const blueTeam = teams.create_team_blue();
 const redTeam = teams.create_team_red();
+const greenTeam = teams.create_team_green();
 blueTeam.Build.BlocksSet.Value = BuildBlocksSet.Blue;
 redTeam.Build.BlocksSet.Value = BuildBlocksSet.Red;
+greenTeam.Build.BlocksSet.Value = BuildBlocksSet.Green;
 
 // задаем запас смертей в каждой команде
 redTeam.Properties.Get("Deaths").Value = maxDeaths;
 blueTeam.Properties.Get("Deaths").Value = maxDeaths;
+greenTeam.Properties.Get("Deaths").Value = maxDeaths;
 // настраиваем параметры, которые нужно выводить в лидерборде
 LeaderBoard.PlayerLeaderBoardValues = [
 	new DisplayValueHeader("Kills", "Statistics/Kills", "Statistics/KillsShort"),
